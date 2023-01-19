@@ -1,0 +1,6 @@
+".\Objects\main.obj",
+".\Objects\Delay.obj",
+".\Objects\LCD1602.obj",
+".\Objects\matrixkey.obj" 
+TO ".\Objects\Projrct" 
+PRINT(".\Listings\Projrct.m51") RAMSIZE(256) 

@@ -1,0 +1,101 @@
+C51 COMPILER V9.54   MAIN                                                                  11/11/2022 21:32:39 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.l
+                    -st) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "LCD1602.H"
+   3          #include "Delay.h"
+*** WARNING C315 IN LINE 1 OF Delay.h: unknown #directive 'ifndef__DELAY_H__'
+*** WARNING C315 IN LINE 2 OF Delay.h: unknown #directive 'define__DELAY_H__'
+*** WARNING C312 IN LINE 6 OF Delay.h: misplaced endif control
+   4          #include "matrixkey.h"
+*** WARNING C315 IN LINE 1 OF matrixkey.h: unknown #directive 'ifnedf'
+*** WARNING C315 IN LINE 6 OF matrixkey.h: unknown #directive 'endifwhile'
+   5          
+   6          
+   7          
+   8          void main()
+   9          {
+  10   1              unsigned int keynum;
+  11   1              unsigned int password[8]={0,5,2,0,1,3,1,4},putin[8]={0};
+  12   1              unsigned int count=0,Try=0,i=0;
+  13   1              LCD_Init();
+  14   1              LCD_ShowString(1,1,"PASSWORD:");
+  15   1              LCD_ShowString(2,1,"00000000");
+  16   1              while(1)
+  17   1                      {
+  18   2                              keynum=matrixkey();
+  19   2                              if((keynum>=1)&&(keynum<=10)&&(count<=7)&&Try<=5)
+  20   2                                      {
+  21   3                                              keynum=keynum%10;
+  22   3                                              putin[count]=keynum;
+  23   3                                              LCD_ShowNum(2,count+1,putin[count],1);
+  24   3                                              count++;
+  25   3                                      }
+  26   2                              if(keynum==11&&Try<=5)
+  27   2                                      {
+  28   3                                              for(i=0;i<=7;i++)
+  29   3                                                      {
+  30   4                                                              if((password[i])!=(putin[i]))
+  31   4                                                                      {
+  32   5                                                                              count=0;
+  33   5                                                                              LCD_Init();
+  34   5                                                                              LCD_ShowString(1,1,"ERROR");
+  35   5                                                                              Try++;
+  36   5                                                                              Delay(5000);
+  37   5                                                                              LCD_ShowString(1,1,"PASSWORD:");
+  38   5                                                                              LCD_ShowString(2,1,"00000000");
+  39   5                                                                              break;
+  40   5                                                                      }
+  41   4                                                              if(i==7)
+  42   4                                                                      {
+  43   5                                                                              LCD_Init();
+  44   5                                                                              LCD_ShowString(1,1,"I LOVE YOU");
+  45   5                                                                              LCD_ShowString(2,1,"Zhouyushan");
+  46   5                                                                      }       
+  47   4                                                      }
+  48   3                                      }
+  49   2                              if(keynum==12&&Try<=5)
+C51 COMPILER V9.54   MAIN                                                                  11/11/2022 21:32:39 PAGE 2   
+
+  50   2                                      {
+  51   3                                              for(i=0;i<=7;i++)
+  52   3                                                      {
+  53   4                                                              putin[i]=0;
+  54   4                                                      }
+  55   3                                              count=0;        
+  56   3                                              LCD_ShowString(1,1,"PASSWORD:");
+  57   3                                              LCD_ShowString(2,1,"00000000"); 
+  58   3                                      }
+  59   2                              if(keynum==13&&Try<=5&&count>0)
+  60   2                                      {
+  61   3                                              count--;
+  62   3                                              LCD_ShowString(1,1,"PASSWORD:");
+  63   3                                              LCD_ShowString(2,1,"00000000");
+  64   3                                              for(i=0;i<count;i++)
+  65   3                                                      {
+  66   4                                                              LCD_ShowNum(2,i+1,putin[i],1);
+  67   4                                                      }
+  68   3                                      }
+  69   2                      }
+  70   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    573    ----
+   CONSTANT SIZE    =     79    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      40
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  5 WARNING(S),  0 ERROR(S)
