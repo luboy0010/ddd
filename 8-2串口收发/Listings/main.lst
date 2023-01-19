@@ -1,0 +1,54 @@
+C51 COMPILER V9.54   MAIN                                                                  11/16/2022 14:23:32 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.l
+                    -st) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "Delay.h"
+*** WARNING C315 IN LINE 1 OF Delay.h: unknown #directive 'ifndef__DELAY_H__'
+*** WARNING C315 IN LINE 2 OF Delay.h: unknown #directive 'define__DELAY_H__'
+*** WARNING C312 IN LINE 6 OF Delay.h: misplaced endif control
+   3          #include "UART.h"
+*** WARNING C315 IN LINE 1 OF UART.h: unknown #directive 'ifnedf'
+*** WARNING C312 IN LINE 6 OF UART.h: misplaced endif control
+   4          
+   5          unsigned char Sec;
+   6          
+   7          
+   8          
+   9          void UART_SendByte(unsigned char Byte)
+  10          {
+  11   1              SBUF=Byte;
+  12   1              while(TI==0);
+  13   1              TI=0;
+  14   1      }
+  15          
+  16          void main()
+  17          {
+  18   1              UART_Init();
+  19   1              while(1)
+  20   1              {
+  21   2                      UART_SendByte(Sec);
+  22   2                      Sec++;
+  23   2                      Delay(1000);
+  24   2              }
+  25   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     27    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  5 WARNING(S),  0 ERROR(S)
